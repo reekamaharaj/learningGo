@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	findIan()
+	slice()
 } //function with no parameters, the main function will get called when the program is executed.
 
 func helloWorld() {
@@ -47,3 +47,19 @@ func findIan() {
 		fmt.Println("Not Found")
 	}
 }
+
+func slice() {
+
+	// intSlice := make([]int, 3)
+	intSlice := []int{1, 2, 3}
+	for i := range intSlice {
+		//i is the index
+		var intEntered int
+		fmt.Println("Enter integers for storage")
+		fmt.Scanln(&intEntered)
+		intSlice[i] = intEntered
+	}
+	fmt.Printf("The slice you created has a length of %d a capacity of %d and the full slice is %v\n", len(intSlice), cap(intSlice), intSlice)
+}
+
+// Write a program which prompts the user to enter integers and stores the integers in a sorted slice. The program should be written as a loop. Before entering the loop, the program should create an empty integer slice of size (length) 3. During each pass through the loop, the program prompts the user to enter an integer to be added to the slice. The program adds the integer to the slice, sorts the slice, and prints the contents of the slice in sorted order. The slice must grow in size to accommodate any number of integers which the user decides to enter. The program should only quit (exiting the loop) when the user enters the character ‘X’ instead of an integer.

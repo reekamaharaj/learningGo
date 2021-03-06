@@ -1,0 +1,16 @@
+package main
+
+import "fmt"
+
+func main() {
+	// intSlice := make([]int, 3)
+	intSlice := []int{1, 2, 3}
+	for i := range intSlice {
+		//i is the index
+		var intEntered int
+		fmt.Println("Enter integers for storage")
+		fmt.Scanln(&intEntered)
+		intSlice[i] = intEntered
+	}
+	fmt.Printf("The slice you created has a length of %d a capacity of %d and the full slice is %v\n", len(intSlice), cap(intSlice), intSlice)
+}
