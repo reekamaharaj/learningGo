@@ -16,7 +16,7 @@ func helloWorld() {
 	fmt.Println("hello world")
 }
 
-// Write a program which prompts the user to enter a floating point number and prints the integer which is a truncated version of the floating point number that was entered. Truncation is the process of removing the digits to the right of the decimal place.
+// trunc is a function which prompts the user to enter a floating point number and prints the integer which is a truncated version of the floating point number that was entered.
 
 func trunc() {
 	var floatNum float64
@@ -26,9 +26,14 @@ func trunc() {
 	fmt.Println(math.Trunc(floatNum))
 }
 
-// convert the input to lower case
-// first letter must be i, last letter must be n, and an a needs to be in the middle somewhere. - found case. otherwise not found
-// Test for: The program should print “Found!” for the following example entered strings, “ian”, “Ian”, “iuiygaygn”, “I d skd a efju N”. The program should print “Not Found!” for the following strings, “ihhhhhn”, “ina”, “xian”.
+// findIan is a function that will prompt a user to enter a string and will check the input to see if it starts with i, ends with n and contains a. Case does not matter, spaces do not matter. Found will be returned on success. Not Fount will be returned otherwise.
+
+// convert the input to lower case to account for capital letters.
+// spaces are a problem for the strings package, needed bufio package to handle spaces
+
+// Test cases:
+// Found: “ian”, “Ian”, “iuiygaygn”, “I d skd a efju N
+// Not Found: “ihhhhhn”, “ina”, “xian”
 
 func findIan() {
 	fmt.Println("Enter a string") //instruction to user
@@ -48,8 +53,9 @@ func findIan() {
 	}
 }
 
-func slice() {
+// slice is a function which prompts the user to enter integers and stores the integers in a sorted slice. During each pass through the loop, the program prompts the user to enter an integer to be added to the slice. The program will only quit (exiting the loop) when the user enters the character ‘X’ instead of an integer.
 
+func slice() {
 	// intSlice := make([]int, 3)
 	intSlice := []int{1, 2, 3}
 	for i := range intSlice {
@@ -63,3 +69,5 @@ func slice() {
 }
 
 // Write a program which prompts the user to enter integers and stores the integers in a sorted slice. The program should be written as a loop. Before entering the loop, the program should create an empty integer slice of size (length) 3. During each pass through the loop, the program prompts the user to enter an integer to be added to the slice. The program adds the integer to the slice, sorts the slice, and prints the contents of the slice in sorted order. The slice must grow in size to accommodate any number of integers which the user decides to enter. The program should only quit (exiting the loop) when the user enters the character ‘X’ instead of an integer.
+
+//Hash table

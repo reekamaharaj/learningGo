@@ -14,3 +14,22 @@ func main() {
 	}
 	fmt.Printf("The slice you created has a length of %d a capacity of %d and the full slice is %v\n", len(intSlice), cap(intSlice), intSlice)
 }
+
+
+dev/pairing
+	- actual code
+	implementation of a software program
+
+	able to walk through exercise, note obstractions. detail of architect of implementation, code layout, articulate and clarity of thought process, abilty to place emphasis on detail, knowledge/agility/empathy
+
+sys architect
+	big picture design thinking, specific problem, intentionally vague, ask questions, and focus on software aspects,
+
+	add detail to thoughts, acceptable solution, explain thoughts with passion and clarity. stuck in small details, focus on solving larger problem, potential trade offs, coding to consider more than one thing. noting problems not being solved, potential problems, ui experience, complex unnecessarily, receptive to feedback, solid technical grounding.
+
+code review
+	- actual code
+	awareness of language, pitfalls, 45 interactive code review exercise, 15 mins for discussion and questions
+	candidates to make design, identify bugs or defects, syntax improvements
+
+	able to suggest improvements, acknowledge other considerations, organization/audiance consideration. code comments, explain changes and why, find bugs if time allows
