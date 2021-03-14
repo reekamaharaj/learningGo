@@ -11,7 +11,7 @@ func main() {
 	//program starts
 	fmt.Println("The slice sort program has started.")
 	//create an empty integer slice of length 3
-	// intSlice := make([]int, 3)
+	intSlice := make([]int, 3)
 
 	//loop start
 	for {
@@ -37,15 +37,14 @@ func main() {
 				fmt.Println("Does not compute. Enter an integer or request to exit.")
 				continue
 			}
-
+			intSlice = append(intSlice, toInt)
 			fmt.Println("You entered:", toInt)
+			fmt.Println("The slice is: ", intSlice)
 		}
 
 	}
 
 }
-
-//check if its an integer
 
 //if an integer is added then add it to the slice
 //sort the slice
