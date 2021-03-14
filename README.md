@@ -94,6 +94,43 @@ switch cases will automatically break after a successful case
 
 Underscore _ : Blank identifier. Anonymous placeholder. May be used like any other identifier in a declaration, but it does not introduce a binding. Can ignore values, import for side effects, or silence compiler
 
+- From JS to Go article: "only got functions and structs that map to functions"
+
+## 25 Keywords in Go
+
+### Declaration
+- const
+- var
+- func
+- type
+- import
+- package
+
+### Composite types
+- chan: define a channerl
+- interface: specify method set, list of methods for a type
+- map: unordered kv pair collection
+- struct: collection of fields
+
+### Control flow
+- break
+- case
+- continue
+- default
+- else
+- fallthrough: use in case of switch statement, the next case is entered
+- for
+- goto: jump to labeled statement without condition
+- if
+- range: iterate over items. (like a map or an array)
+- return
+- select: lets a goroutine to wait during the simultaneous communication operations
+- switch
+
+### Function modifier
+- defer: defer the execution of a function until the surrounding function executes
+- go: triggers goroutine, managed by goland-runtime
+
 ## Additional notes for written programs
 For findIan
 - [ ] What about symbols and numbers? Should test for that...
@@ -101,3 +138,10 @@ For findIan
 - [ ] Error handling have not considered that yet, should do that
 - [ ] Make a function to handle user input
 - [ ] Slice code should check inputs, and just... needs more work
+
+## Links to articles, videos, tutorials
+- [JS to GO. Medium article](https://steevehook.medium.com/my-journey-from-javascript-to-go-9fb1e5d49fc2)
+- [JS to Go YT video](https://youtu.be/r_nW-fMTXFw)
+- [Coursera Getting Started with Go](https://www.coursera.org/learn/golang-getting-started/home/welcome)
+- [25 keywords in Go](https://medium.com/wesionary-team/know-about-25-keywords-in-go-eca109855d4d)
+- [Console Input bufio scanner & Type conversion](https://www.youtube.com/watch?v=1-bM3lSBDaA)
