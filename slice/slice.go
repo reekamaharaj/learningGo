@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -28,7 +29,16 @@ func main() {
 			fmt.Println("You exited the program.")
 			break
 		} else {
-			fmt.Println("You have not exited the program")
+			var toInt int
+			//convert string to int, or return an error
+			toInt, err := strconv.Atoi(userInput)
+			// what to do if there is an error
+			if err != nil {
+				fmt.Println("Does not compute. Enter an integer or request to exit.")
+				continue
+			}
+
+			fmt.Println("You entered:", toInt)
 		}
 
 	}
@@ -36,7 +46,7 @@ func main() {
 }
 
 //check if its an integer
-//x or X will exit program
+
 //if an integer is added then add it to the slice
 //sort the slice
 //print the sorted slice
