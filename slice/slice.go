@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -40,13 +41,12 @@ func main() {
 			}
 			if count < len(intSlice) {
 				intSlice[count] = toInt
-				fmt.Printf("The length of the slice is %d and it contains %v \n", len(intSlice), intSlice)
-				count++
 			} else {
 				intSlice = append(intSlice, toInt)
-				fmt.Printf("The length of the slice is %d and it contains %v \n", len(intSlice), intSlice)
-				count++
 			}
+			count++
+			sort.Ints(intSlice)
+			fmt.Printf("The length of the slice is %d and it contains %v \n", len(intSlice), intSlice)
 
 		}
 
