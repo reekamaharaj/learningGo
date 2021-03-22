@@ -153,6 +153,36 @@ Definition of a protocols and formats. Standard definition for data.
     - WriteFile creates a file, dumps whatever it needs to into the file and then closes the file. Not used for appending a file.
 
 ## os package
+- more control over file access than ioutil
+- os.Open(): Opens a file, returns a file descriptor (File)
+    - file descriptor, used to access the file
+- os.Close(): Closes a file
+- os.Read(): Reads from a file into a []byte, fills the [] byte, contorl the amount read based on the []byte size
+- os.Write(): writes a []byte into a file
+
+Open, Read, Close
+    `f, err := os.Open("dt.txt")`
+    `barr := make([]byte, 10)`
+    `nb, err := f.Read(barr)`
+    `f.Close()`
+
+    nb: number of bytes read
+    Head: where in the file something is, will increment with each Read. Close will reset the head
+    Read and fills barr
+    Read returns # of bytes read
+    May be less than []byte length
+
+Create, Write
+    `f, err :=`
+    `os.Create("outfile.txt")`
+    `barr := []byte{1, 2, 3}`
+    `nb, err := f.Write(barr)`
+    `nb, err := f.WriteString("Hi")`
+
+    WriteString() writes a string
+    Write() writes a []byte, Any unicode sequence
+
+
 ## Interesting thing learnt
 spaces are a problem for the strings package, needed bufio package to handle spaces
 
