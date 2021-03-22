@@ -4,13 +4,14 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 )
 
 func main() {
 	//Prompt user to enter name and address
-	fmt.Println("Enter your first name and address")
+	fmt.Println("Enter your first name")
 
 	//Tells program to scan input using bufio module, os: operating system, Stdin: standard input, what is input to command line. Creates object scanner.
 	scanner := bufio.NewScanner(os.Stdin)
@@ -19,8 +20,20 @@ func main() {
 	scanner.Scan()
 
 	//Save the text scanned to the variable userInput, will be saved as a string
-	userInput := scanner.Text()
+	name := scanner.Text()
+	fmt.Println("Enter your address")
+	addScanner := bufio.NewScanner(os.Stdin)
+	addScanner.Scan()
+	address := addScanner.Text()
 
-	//Returns what the user input
-	fmt.Println("Your name and address are: ", userInput)
+	m := make(map[string]string)
+	m["name"] = name
+	m["address"] = address
+
+	mjson, err := json.Marshal(m)
+	if err != nil {
+		fmt.Println("error", err)
+	}
+	mjsonstr := string(mjson)
+	fmt.Println(mjsonstr)
 }
