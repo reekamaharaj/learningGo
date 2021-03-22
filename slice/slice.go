@@ -53,14 +53,15 @@ func main() {
 			if count < len(intSlice) {
 				//then at index [count] of the slice, add the integer
 				intSlice[count] = toInt
+
 			} else {
-				//if count is
+				//if count is now equal to the length of the slice
 				intSlice = append(intSlice, toInt)
 			}
 			count++
-			fmt.Println("count is", count)
-			sort.Ints(intSlice)
-			fmt.Printf("The length of the slice is %d and it contains %v \n", len(intSlice), intSlice)
+			sorted := intSlice[0:count]
+			sort.Ints(sorted)
+			fmt.Printf("The sorted array is %v \n", sorted)
 
 		}
 
