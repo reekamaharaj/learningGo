@@ -86,7 +86,73 @@ initialized fields with zero
 struct literal
 `p1 := Person (name: "joe", addr: "address", phone: "123")`
 
+## RFC (Request for Comments)
+Definition of a protocols and formats. Standard definition for data.
+- HTML (Hypertext Markup Language), RFC 1866
+- URI (Uniform Resource Identifier), RFC 3986
+- HTTP (Hypertext Transfer Protocol), RFC 2616
+- JSON (Javascript Object Notation), RFC 7159
 
+## Protocol Packages
+- To encode and decode protocol format
+- net/http: web communication protocol
+- net: TCP/IP and socket programming
+    TCP/IP: Define the internet. FTP, Secure Shell, others. Basic TCP/IP, UDP stack
+- JSON: Attribute-value pairs
+    - struct or map
+    - Go struct
+        `p1 := Person(name: "joe", addr: "a st.", phone: "123")`
+    - JSON
+        - `{"name": "joe", "addr": "a st.", "phone": "123"}`
+        - All unicode
+        - Human-readable
+        - Fairly compact representation
+        - Types can be combined recursively (Array of strcts, struct in struct)
+        - JSON marshalling: Generating JSON representation from an object
+        ` type struct Person{`
+            `name string`
+            `addr string`
+            `phone string`
+        `}`
+        `p1 := Person(name: "joe", addr: "a st.", phone: "123")`
+        `barr, err := `
+        `json.Marshal(p1)`
+        - Marshal() returns JSON representation as []byte
+        - JSON Unmarshalling: Convert a JSON[]byte into a Go object
+        `var p2 Person`
+        `err := json.Unmarshal(barr, &p2)`
+        Person struct has to fit the JSON[]byte. Key in Person struct needs to match the attribute in the JSON representation. Error will be thrown if it doesn't fit
+
+## File Access
+- Linear access, not random access
+    - Mechanical delay
+- Basic operations
+    - Open: get handle for access
+    - Read: read bytes into []byte
+    - Write: write []byte into file
+    - Close: release handle
+    - Seek: move read/write head
+
+## ioutil package
+- file access package
+- "io/ioutil" has basic functions
+
+    ReadFile
+    `dat, e :=`
+    `ioutil.ReadFile("test.txt")`
+    - dat is []byte filled with contents of entire file
+    - ReadFile will open and close the file, will work for small files
+
+    WriteFile
+    `dat = "Hello, world`
+    ` err := ioutil.WriteFile`
+    `("outfile.txt", dat, 0777)`
+    - writes []byte to file
+    - creates a file
+    - Unix-style permission bytes (0777, gives permission to read/write)
+    - WriteFile creates a file, dumps whatever it needs to into the file and then closes the file. Not used for appending a file.
+
+## os package
 ## Interesting thing learnt
 spaces are a problem for the strings package, needed bufio package to handle spaces
 
