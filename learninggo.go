@@ -9,7 +9,7 @@ import (
 
 	"fmt"
 	// import format package, implements formatting for input and output
-	// format 'verbs' derived from C, but simpler. %q: single-quoted character literal. %d base 10, %T type value %v value in a default format
+	// format 'verbs' derived from C, but simpler. %q: single-quoted character literal. %d base 10, %T type value %v value in a default format. Print with Printf
 
 	"math"
 	//import math package
@@ -22,7 +22,7 @@ import (
 )
 
 func main() {
-	slice()
+	trunc()
 } //function with no parameters, the main function will get called when the program is executed.
 
 func helloWorld() {
@@ -69,30 +69,8 @@ func findIan() {
 // slice is a function which prompts the user to enter integers and stores the integers in a sorted slice. During each pass through the loop, the program prompts the user to enter an integer to be added to the slice. The program will only quit (exiting the loop) when the user enters the character ‘X’ instead of an integer.
 
 func slice() {
-	fmt.Println("Slice started. Hit Enter to continue or type X to exit.")
-	intSlice := make([]int, 3)
-	// intSlice := []int{1, 2, 3}
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	userInput := scanner.Text()
 
-	for i := range intSlice {
-		//i is the index
-		if userInput == "X" || userInput == "x" {
-			fmt.Println("You exited the program.")
-			break
-		}
-
-		var intEntered int
-		fmt.Println("Enter integers for storage, type X to exit")
-		fmt.Scanln(&intEntered)
-		intSlice[i] = intEntered
-	}
-
-	fmt.Printf("The slice you created has a length of %d a capacity of %d and the full slice is %v\n", len(intSlice), cap(intSlice), intSlice)
 }
-
-// Code works okay. Isn't perfect at all. x will exit before the loop has started and during. But doesn't return message that program is exited. Code should also check for values and send an err when a number isn't entered...
 
 func ageAt2020() {
 	scanner := bufio.NewScanner(os.Stdin) //bufio module (buffered input/output) create a NewScanner object as scanner. Object has od.Stdin. os: operating system. Stdin: what is input on the command line
@@ -105,3 +83,5 @@ func ageAt2020() {
 	// _ ignore error if there is one and continue
 	fmt.Printf("At the end of 2020 you were %d years old", 2020-input)
 }
+
+//age at 2020 doesn't check for input being a number...

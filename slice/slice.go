@@ -13,38 +13,52 @@ func main() {
 	fmt.Println("The slice sort program has started.")
 	//create an empty integer slice of length 3
 	intSlice := make([]int, 3)
+	//starts a counter
 	count := 0
 
-	//loop start
+	//loop starts
 	for {
-		scanner := bufio.NewScanner(os.Stdin)
 		//Tells program to scan input using bufio module, os: operating system, Stdin: standard input, what is input to command line. Creates object scanner.
-		fmt.Println("Enter a number to add to the slice. Hit X to exit program")
+		scanner := bufio.NewScanner(os.Stdin)
+
 		//Prompt user to enter integer
-		scanner.Scan()
+		fmt.Println("Enter a number to add to the slice. Hit X to exit program")
+
 		//scan what the user input as a string
+		scanner.Scan()
+
+		//Save the text scanned to the variable userInput, will be saved as a string
 		userInput := scanner.Text()
-		//Save the text scanned to the variable userInput
 
 		//check if x or X is entered and exit if yes
 		if userInput == "X" || userInput == "x" {
 			fmt.Println("You exited the program.")
 			break
 		} else {
+			//if not exited
+
+			//create an integer variable
 			var toInt int
+
 			//convert string to int, or return an error
+			//string - userInput to int - toInt
 			toInt, err := strconv.Atoi(userInput)
+
 			// what to do if there is an error
 			if err != nil {
 				fmt.Println("Does not compute. Enter an integer or request to exit.")
 				continue
 			}
+			//if the counter is less than the length of the slice (slice starts at a length of 3 and count starts at 0)
 			if count < len(intSlice) {
+				//then at index [count] of the slice, add the integer
 				intSlice[count] = toInt
 			} else {
+				//if count is
 				intSlice = append(intSlice, toInt)
 			}
 			count++
+			fmt.Println("count is", count)
 			sort.Ints(intSlice)
 			fmt.Printf("The length of the slice is %d and it contains %v \n", len(intSlice), intSlice)
 
