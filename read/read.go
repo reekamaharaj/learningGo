@@ -1,17 +1,35 @@
 package main
 
+import (
+	// "bufio"
+	"fmt"
+	"os"
+)
+
 type name struct {
 	fName string
 	lName string
 }
 
-func newName(fName string) *name {
-	n := name{fName: fName}
-	n.lName = lName
-}
-
 func main() {
+	// fmt.Println("Enter file name")
+	// scanner := bufio.NewScanner(os.Stdin)
+	// scanner.Scan()
+	// file := scanner.Text()
 
+	file := "names.txt"
+	f, err := os.Open(file)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	name := make([]byte, 20)
+	count, err := f.Read(name)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("read %d bytes: %q\n", count, name[:count])
+	f.Close()
 }
 
 // prompt user for file name

@@ -19,9 +19,9 @@
 
 - Open, Read, Close
     - `f, err := os.Open("dt.txt")`
-`barr := make([]byte, 10)`
-`nb, err := f.Read(barr)`
-`f.Close()`
+    - `barr := make([]byte, 10)`
+    - `nb, err := f.Read(barr)`
+    - `f.Close()`
     - nb: number of bytes read
     - Head: where in the file something is, will increment with each Read. Close will reset the head
     - Read and fills barr
@@ -30,10 +30,10 @@
 
 - Create, Write
     - `f, err :=`
-`os.Create("outfile.txt")`
-`barr := []byte{1, 2, 3}`
-`nb, err := f.Write(barr)`
-`nb, err := f.WriteString("Hi")`
+    - `os.Create("outfile.txt")`
+    - `barr := []byte{1, 2, 3}`
+    - `nb, err := f.Write(barr)`
+    - `nb, err := f.WriteString("Hi")`
 
     - WriteString() writes a string
     - Write() writes a []byte, Any unicode sequence
