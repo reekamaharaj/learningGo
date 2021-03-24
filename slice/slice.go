@@ -82,3 +82,5 @@ func main() {
 //Can more than three integers be added and sorted?
 
 //Should check that the entered value is a number, and if it isn't ask user for new input that is a number
+
+// slice is a function which prompts the user to enter integers and stores the integers in a sorted slice. During each pass through the loop, the program prompts the user to enter an integer to be added to the slice. The program will only quit (exiting the loop) when the user enters the character ‘X’ instead of an integer.

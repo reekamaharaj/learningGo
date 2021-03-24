@@ -95,7 +95,6 @@ Definition of a protocols and formats. Standard definition for data.
 
 ## Protocol Packages
 - To encode and decode protocol format
-- net/http: web communication protocol
 - net: TCP/IP and socket programming
     TCP/IP: Define the internet. FTP, Secure Shell, others. Basic TCP/IP, UDP stack
 - JSON: Attribute-value pairs
@@ -108,20 +107,6 @@ Definition of a protocols and formats. Standard definition for data.
         - Human-readable
         - Fairly compact representation
         - Types can be combined recursively (Array of strcts, struct in struct)
-        - JSON marshalling: Generating JSON representation from an object
-        ` type struct Person{`
-            `name string`
-            `addr string`
-            `phone string`
-        `}`
-        `p1 := Person(name: "joe", addr: "a st.", phone: "123")`
-        `barr, err := `
-        `json.Marshal(p1)`
-        - Marshal() returns JSON representation as []byte
-        - JSON Unmarshalling: Convert a JSON[]byte into a Go object
-        `var p2 Person`
-        `err := json.Unmarshal(barr, &p2)`
-        Person struct has to fit the JSON[]byte. Key in Person struct needs to match the attribute in the JSON representation. Error will be thrown if it doesn't fit
 
 ## File Access
 - Linear access, not random access
@@ -132,56 +117,6 @@ Definition of a protocols and formats. Standard definition for data.
     - Write: write []byte into file
     - Close: release handle
     - Seek: move read/write head
-
-## ioutil package
-- file access package
-- "io/ioutil" has basic functions
-
-    ReadFile
-    `dat, e :=`
-    `ioutil.ReadFile("test.txt")`
-    - dat is []byte filled with contents of entire file
-    - ReadFile will open and close the file, will work for small files
-
-    WriteFile
-    `dat = "Hello, world`
-    ` err := ioutil.WriteFile`
-    `("outfile.txt", dat, 0777)`
-    - writes []byte to file
-    - creates a file
-    - Unix-style permission bytes (0777, gives permission to read/write)
-    - WriteFile creates a file, dumps whatever it needs to into the file and then closes the file. Not used for appending a file.
-
-## os package
-- more control over file access than ioutil
-- os.Open(): Opens a file, returns a file descriptor (File)
-    - file descriptor, used to access the file
-- os.Close(): Closes a file
-- os.Read(): Reads from a file into a []byte, fills the [] byte, contorl the amount read based on the []byte size
-- os.Write(): writes a []byte into a file
-
-Open, Read, Close
-    `f, err := os.Open("dt.txt")`
-    `barr := make([]byte, 10)`
-    `nb, err := f.Read(barr)`
-    `f.Close()`
-
-    nb: number of bytes read
-    Head: where in the file something is, will increment with each Read. Close will reset the head
-    Read and fills barr
-    Read returns # of bytes read
-    May be less than []byte length
-
-Create, Write
-    `f, err :=`
-    `os.Create("outfile.txt")`
-    `barr := []byte{1, 2, 3}`
-    `nb, err := f.Write(barr)`
-    `nb, err := f.WriteString("Hi")`
-
-    WriteString() writes a string
-    Write() writes a []byte, Any unicode sequence
-
 
 ## Interesting thing learnt
 spaces are a problem for the strings package, needed bufio package to handle spaces
