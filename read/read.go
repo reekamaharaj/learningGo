@@ -5,9 +5,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
-type name struct {
+type Name struct {
 	fName string
 	lName string
 }
@@ -25,19 +26,24 @@ func main() {
 		fmt.Println(err)
 	}
 
+	// scan file by line and add to slice
 	fileScanner := bufio.NewScanner(f)
 	fileScanner.Split(bufio.ScanLines)
-	var text []string
+	var names []*Name
 
 	for fileScanner.Scan() {
-		text = append(text, fileScanner.Text())
+		fullName := fileScanner.Text()
+		s := strings.Split(fullName, " ")
+		fName, lName := s[0], s[1]
+		names = append(names, &Name{fName: fName, lName: lName})
+	}
+
+	for _, value := range names {
+		fmt.Printf("%#v\n", value)
 	}
 
 	f.Close()
 
-	for _, each_ln := range text {
-		fmt.Println(each_ln)
-	}
 }
 
 // [x] prompt user for file name
