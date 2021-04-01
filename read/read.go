@@ -48,9 +48,10 @@ func main() {
 
 // [x] prompt user for file name
 // [x] read from a file
-// [] series of names. first. last. separated by a space'
-// [] represent text in a slice of structs
-// [] define a name struct with fname and lname. string size 20
-// [] New struct for each name
-// [] add struct to slice
-// [] print the first and last name in each struct
+// [x] series of names. first. last. separated by a space'
+// [x] represent text in a slice of structs
+// [x] define a name struct with fname and lname.
+// [] string size 20 for each name
+// [x] New struct for each name
+// [x] add struct to slice
+// [x] print the first and last name in each struct
