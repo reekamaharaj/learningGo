@@ -1,4 +1,3 @@
-// prompt the user to type in a sequence of up to 10 integers.
 // print the integers out on one line, in sorted order, from least to
 // greatest.
 // function called BubbleSort()
@@ -23,25 +22,29 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func swap() {
 	fmt.Println("Swap fucntion")
 }
 
-func bubbleSort() {
+func bubbleSort(intSlice []string) {
+	swap()
 	fmt.Println("Bubble Sort function")
+	fmt.Printf("You input: %v\n", intSlice)
 }
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Println("Enter a sequence of numbers. No more than 10.")
+	fmt.Println("Enter a sequence of numbers, separated by a space. No more than 10.")
 	scanner.Scan()
 	input := scanner.Text()
-	fmt.Printf("You input: %v\n", input)
+	iStr := strings.Split(input, " ")
 
-	swap()
+	fmt.Println(iStr)
+	fmt.Println(iStr[1])
 
-	bubbleSort()
+	// bubbleSort(input)
 
 }
