@@ -22,14 +22,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 func swap() {
-	fmt.Println("Swap fucntion")
+	fmt.Println("Swap function")
 }
 
-func bubbleSort(intSlice []string) {
+func bubbleSort(intSlice []int) {
 	swap()
 	fmt.Println("Bubble Sort function")
 	fmt.Printf("You input: %v\n", intSlice)
@@ -38,13 +39,21 @@ func bubbleSort(intSlice []string) {
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Enter a sequence of numbers, separated by a space. No more than 10.")
+
 	scanner.Scan()
 	input := scanner.Text()
 	iStr := strings.Split(input, " ")
 
-	fmt.Println(iStr)
-	fmt.Println(iStr[1])
+	iSlice := []int{}
 
-	// bubbleSort(input)
+	for _, i := range iStr {
+		j, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		iSlice = append(iSlice, j)
+	}
+
+	bubbleSort(iSlice)
 
 }
