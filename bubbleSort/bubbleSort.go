@@ -34,32 +34,33 @@ func swap(intI, intJ int) {
 
 func bubbleSort(intSlice []int) {
 
-	for _, i := range intSlice {
-		if intSlice[i] > intSlice[i+1] {
-			intI := intSlice[i]
-			intJ := intSlice[i+1]
-			swap(intI, intJ)
+	// for _, i := range intSlice {
+	// 	if intSlice[i] > intSlice[i+1] {
+	// 		intI := intSlice[i]
+	// 		intJ := intSlice[i+1]
+	// 		swap(intI, intJ)
 
-		}
-	}
+	// 	}
+	// }
 
 	fmt.Println("Bubble Sort function")
 	fmt.Printf("You input: %v\n", intSlice)
 }
 
 func userInput(input string) []int {
+	// take the string of numbers "23 57 1 576"
+	// separate by the space and create a slice
 	iStr := strings.Split(input, " ")
-
+	// create an empty slice for integers
 	iSlice := []int{}
-
-	for _, i := range iStr {
-		j, err := strconv.Atoi(i)
-		if err != nil {
-			panic(err)
-		}
+	// for each index convert the string to an integer and append to iSlice
+	for i := 0; i < len(iStr); i++ {
+		j, _ := strconv.Atoi(iStr[i])
 		iSlice = append(iSlice, j)
 	}
+	// at the end of the loop print the slice
 	fmt.Printf("iSlice is %v\n", iSlice)
+	//return iSlice
 	return iSlice
 }
 
@@ -67,11 +68,14 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Println("Enter a sequence of numbers, separated by a space. No more than 10.")
-
+	//Sample input: 23 57 1 576
 	scanner.Scan()
 	input := scanner.Text()
+	// input will have "23 57 1 576" as a string
+	// send string of numbers to the userInput function to get a slice with integers for the BubbleSort function
 	iSlice := userInput(input)
 
+	//Call bubbleSort on iSlice
 	bubbleSort(iSlice)
 
 }
