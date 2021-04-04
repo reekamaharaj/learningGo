@@ -26,25 +26,33 @@ import (
 	"strings"
 )
 
-func swap(intI, intJ int) {
+func swap(intSlice []int) {
+	//first number and second number, compare
+	// if first > second then swap first and second
+	// if first < second then do nothing and contiue the loop
+	//first > second so. first = second and second = first
+	var i int = 0
+	var j int = 1
 
-	fmt.Println("Swap function i is%v \n j is %v \n", intI, intJ)
+	for j < len(intSlice) {
+		var iInt int = intSlice[i]
+		var jInt int = intSlice[j]
 
+		if iInt > jInt {
+			intSlice[i] = jInt
+			intSlice[j] = iInt
+		}
+		i++
+		j++
+	}
 }
 
-func bubbleSort(intSlice []int) {
-
-	// for _, i := range intSlice {
-	// 	if intSlice[i] > intSlice[i+1] {
-	// 		intI := intSlice[i]
-	// 		intJ := intSlice[i+1]
-	// 		swap(intI, intJ)
-
-	// 	}
-	// }
-
-	fmt.Println("Bubble Sort function")
-	fmt.Printf("You input: %v\n", intSlice)
+func bubbleSort(intSlice []int) []int {
+	// going through the whole intSlice slice
+	for i := 0; i < len(intSlice); i++ {
+		swap(intSlice)
+	}
+	return intSlice
 }
 
 func userInput(input string) []int {
@@ -76,6 +84,6 @@ func main() {
 	iSlice := userInput(input)
 
 	//Call bubbleSort on iSlice
-	bubbleSort(iSlice)
+	fmt.Printf("Sorted slice %v", bubbleSort(iSlice))
 
 }
