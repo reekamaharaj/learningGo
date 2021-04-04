@@ -15,7 +15,7 @@
 
 // Test: sequence of integers should be all positive numbers
 // Test: at least one negative number
-
+// doesnt limit to 10 right now. Need to do that
 package main
 
 import (
