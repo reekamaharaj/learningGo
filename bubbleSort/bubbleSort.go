@@ -26,20 +26,23 @@ import (
 	"strings"
 )
 
-func swap() {
-	fmt.Println("Swap function")
+func swap(intI, intJ int) {
+
+	fmt.Println("Swap function i is%v \n j is %v \n", intI, intJ)
 
 }
 
 func bubbleSort(intSlice []int) {
-	// for _, i := range intSlice {
-	// 	if intSlice[i] > intSlice[i+1] {
-	// 		swap(intSlice[i], intSlice[i+1])
 
-	// 	}
-	// }
+	for _, i := range intSlice {
+		if intSlice[i] > intSlice[i+1] {
+			intI := intSlice[i]
+			intJ := intSlice[i+1]
+			swap(intI, intJ)
 
-	swap()
+		}
+	}
+
 	fmt.Println("Bubble Sort function")
 	fmt.Printf("You input: %v\n", intSlice)
 }
@@ -56,12 +59,13 @@ func userInput(input string) []int {
 		}
 		iSlice = append(iSlice, j)
 	}
-
+	fmt.Printf("iSlice is %v\n", iSlice)
 	return iSlice
 }
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+
 	fmt.Println("Enter a sequence of numbers, separated by a space. No more than 10.")
 
 	scanner.Scan()
