@@ -77,6 +77,8 @@ func main() {
 
 	fmt.Println("Enter a sequence of numbers, separated by a space. No more than 10.")
 	//Sample input: 23 57 1 576
+	//Even numbers: 22 10 38 2 100 62
+	//With a negative number: -2 547 2 -4 38
 	scanner.Scan()
 	input := scanner.Text()
 	// input will have "23 57 1 576" as a string
