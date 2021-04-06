@@ -23,8 +23,29 @@
 
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func userInput(input string) []float64 {
+	iStr := strings.Split(input, "")
+	iSlice := []float64{}
+	for i := 0; i < len(iStr); i++ {
+		j, _ := strconv.Atoi(iStr[i])
+		iSlice = append(iSlice, j)
+	}
+	fmt.Printf("iSlice is %v\n", iSlice)
+	return iSlice
+}
 
 func main() {
-	fmt.Println("Gunna do physics")
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter an acceleration, initial velocity and initial displacement. Separate with a space and the values can be a float.")
+	scanner.Scan()
+	input := scanner.Text()
+	aVoSoVals := userInput(input)
 }
