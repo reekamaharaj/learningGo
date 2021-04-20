@@ -32,14 +32,14 @@ import (
 )
 
 func userInput(input string) []float64 {
-	iStr := strings.Split(input, "")
-	iSlice := []float64{}
-	for i := 0; i < len(iStr); i++ {
-		j, _ := strconv.Atoi(iStr[i])
-		iSlice = append(iSlice, j)
+	iStr := strings.Split(input, " ")
+	aVoSoVals := []float64{}
+	for i := 0; i < 3; i++ {
+		j, _ := strconv.ParseFloat(iStr[i], 64)
+		aVoSoVals = append(aVoSoVals, j)
 	}
-	fmt.Printf("iSlice is %v\n", iSlice)
-	return iSlice
+	// fmt.Printf("The acceleration, initial velocity and initial displacement are the following %v\n", aVoSoVals)
+	return aVoSoVals
 }
 
 func main() {
@@ -48,4 +48,5 @@ func main() {
 	scanner.Scan()
 	input := scanner.Text()
 	aVoSoVals := userInput(input)
+	fmt.Printf("The acceleration, initial velocity and initial displacement are the following %v\n", aVoSoVals)
 }
