@@ -26,27 +26,50 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
-	"strings"
 )
 
-func userInput(input string) []float64 {
-	iStr := strings.Split(input, " ")
-	aVoSoVals := []float64{}
-	for i := 0; i < 3; i++ {
-		j, _ := strconv.ParseFloat(iStr[i], 64)
-		aVoSoVals = append(aVoSoVals, j)
+func input(input string) float64 {
+	i, _ := strconv.ParseFloat(input, 64)
+	return i
+}
+
+func GenDisplaceFn(a, vo, so float64) func(float64) float64 {
+	return func(t float64) float64 {
+		return ((0.5 * a * (math.Pow(t, 2))) + (vo * t) + so)
 	}
-	// fmt.Printf("The acceleration, initial velocity and initial displacement are the following %v\n", aVoSoVals)
-	return aVoSoVals
 }
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Println("Enter an acceleration, initial velocity and initial displacement. Separate with a space and the values can be a float.")
-	scanner.Scan()
-	input := scanner.Text()
-	aVoSoVals := userInput(input)
-	fmt.Printf("The acceleration, initial velocity and initial displacement are the following %v\n", aVoSoVals)
+
+	aScanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter an acceleration")
+	aScanner.Scan()
+	aInput := aScanner.Text()
+	a := input(aInput)
+
+	vScanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter initial velocity")
+	vScanner.Scan()
+	vInput := vScanner.Text()
+	v := input(vInput)
+
+	sScanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter initial displacement")
+	sScanner.Scan()
+	sInput := sScanner.Text()
+	s := input(sInput)
+
+	tScanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Enter a time in seconds")
+	tScanner.Scan()
+	tInput := tScanner.Text()
+	t := input(tInput)
+
+	fmt.Printf("Acceleration = %v, Initial velocity = %v, Initial displacement = %v, Time = %v\n", a, v, s, t)
+	fn := GenDisplaceFn(a, v, s)
+	fmt.Println("The displacement will be calculated for 3 seconds")
+	fmt.Println(fn(t))
 }
