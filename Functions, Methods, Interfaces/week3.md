@@ -258,10 +258,29 @@ func (p *Point) OffsetX(v float64){
 
 # M3.2.3 - Point Receivers, Referencing, Dereferencing
 
-So one thing about using a pointer receiver is that there's no need to dereference the pointer inside the method. So what I mean by this is that, so let's take a look at this example OffsetX. I want it to have a pointer receiver, because I want OffsetX to actually be able to modify the X coordinate of the type. So I have to pass it a pointer to p. So now if you look to the left of the function name OffsetX, you see p star point. So the receiver is a pointer type. Now notice inside the function I say p.x=p.x+v.
+Using a pointer as a receiver means you don't need to dereference the pointer
 
-I don't say *p.x=*p.x+v, right. That's a dereferencing that you would normally use with pointers. I don't have to do that because this is a common enough thing that going just allows you to get it with basically the ( ) recognizes it and says okay, I know what you mean. If you can just say p.x and it knows even though it's a pointer, it knows to get the x p, it knows to basically de-reference it automatically. So, it's just a handy shorthand, you don't have to do the dereferencing when you're doing this.
-Play video starting at :1:16 and follow transcript1:16
-And likewise there's no need to reference either. So, say I'm in my main and I want to I've defined my offset X, as I showed you, where it accepts a pointer,
-Play video starting at :1:29 and follow transcript1:29
-the receiver type is a pointer, right? Now in this case, in this main, I'm declaring this point p I'm making it 3,4. So p is actually a struct, right? It is the type, it is the actual struct. It is not appointed to the struct, it is the struct. But then when I call OffsetX, I say p.OffsetX, when really, since offset X is supposed to have a point to receiver you would think you would have to say anforsand P dot offset X. But you don't, you can just say P dot offset X and the goal compiler recognizes that just because this is a common thing to do. So it just makes it easier, it's a convenience. So when using pointer receivers it is good programming practice to either have all methods use pointer receivers, or have none of them use pointer receivers. It's just a good standard. It's easy to get confused. So if you have some methods, use pointer receivers and some not use pointer receivers It can get confusing. You'll send a pointer to the one that doesn't need a pointer and so on. So it's just more appropriate to use, it's good practice, you don't have to. You can mix and match if you want, but it's good practice to use all pointer references for a particular type or all non pointer references.
+```
+func (p *Point) OffsetX(v int) {
+    p.x = p.x + v
+}
+```
+
+- Want OffsetX to actually modify the x coordinate, so pass the pointer to p
+- Using a receiver means you don't have to use `*p.x=*p.x+v`, which is dereferencing
+- Point is references as p. not *p
+
+No Need to Reference
+```
+func main(){
+    p := Point{3,4}
+    p.OffsetX(5)
+    fmt.Println(p.x)
+}
+```
+- Do not need to reference when calling the method
+
+## Using Pointer Receivers
+- Good practice
+    - All methods for a type have pointer receivers, or
+    - All methods for a type have non-pointer receivers
