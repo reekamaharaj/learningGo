@@ -284,3 +284,27 @@ func main(){
 - Good practice
     - All methods for a type have pointer receivers, or
     - All methods for a type have non-pointer receivers
+
+What is the difference between an object and a class?
+    A class is a template and an object is an instance of that template.
+Which of the following refers to data hiding?
+    Encapsulation
+Assume that that the type t is the receiver type for a method called Foo(). Under what conditions would it be better to make the receiver type of Foo() a pointer to t, rather than itself?
+    I. When the receiver type t uses a large amount of memory.
+    II. When the method Foo() must modify the data in the object of the receiver type.
+        Both I and II
+What is the difference between a struct in Go and a class in an object-oriented language?
+    A struct contains only data while a class can also contain methods.
+How do you associate a method with an arbitrary data type on Go?
+    Define the method so that its receiver type is the data type of interest.
+Say that you have defined a type t and you have declared an object of that type called t1. Assume that the type t is the receiver type for a method called Foo(). Which expression shows a proper invocation of the the method Foo()?
+    t1.Foo()
+
+
+In Go, how do you hide variables or functions in a package, so that functions outside of the package cannot access them?
+    NOT: Define the variable/function inside the package. Or Use the package keyword
+    Note: Puts the variable/function inside a package but does not necessarily hide them inside the package.Defines a package, but does not necessarily hide everything inside the package.
+
+    ?Use the private keyword.
+    ->?Give the variable/function a name which starts with a lower-case letter
+
