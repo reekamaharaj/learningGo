@@ -1,12 +1,91 @@
 # M3.1.1 - Classes and Encapsulation
-Module 3, Object-Orientation in Go, Topic 1.1, Classes and Encapsulation.
-Play video starting at ::7 and follow transcript0:07
-So, classes are part of object-oriented programming paradigm. And this class, this whole course is for intermediate level people, right, so I'm assuming that people already have exposure to programming. And so it is most likely that you already understand what object oriented programming is, although I will sort of redefine it right now, make sure we have a common understanding. And there's always this question, does Golang support object oriented programming? I'll say yes it does. It doesn't have classes exactly, but it has something equivalent, it allows most of the same features. So just to say what a class is though to start, what a traditional class is, that you would've seen in many other languages. A class is basically a collection of data fields and functions that share a well defined responsibility. So it's data fields and functions put together, usually called methods. You call them methods when they're in a class. So data and methods put together. [COUGH] So as an example, say we want a point class, right, that represent some point in 2D space. So, I'll use a geometry program I'm making, okay? So, the data might be the x coordinate and the y coordinate of the point, that's data that you would associate with a point. The functions, there might be a variety of functions, but maybe I've got distance to origin, quadrants, returns the quadrant that the point's in, AddXO set, AddYO set, set X, set Y, there are a lot of functions that I could put in there. But the point is though, that the data and the functions are all related to the same concept, okay? There is a two-dimensional point and these functions are all things that you do to two-dimensional points. And the data is all the data that's associated with two-dimensional points. So, that's what a class is. Now remember, a class is actually a template. So the class contains data fields but not data. What that means is, when you make this Point class, I'm giving a template on how a point should be created. I'm saying, here's the data that a point should have and here's the function that should operate in that data, but I am not actually providing the data. So a Point class is really a template for a point. An actual point has to have data, has to have an x coordinate and a y coordinate associated with it. So an object is an instantiation of the class, an instance of a class. So it contains actual data. So, as an example, say in my geometry program that I'm trying to make, I have a triangle and this triangle has three points on it, three coordinates, (0,0), (6,0), (5,5). So there are three point objects that I want to create, and I call these objects now. These objects, they're made based on the Point class template so they have x coordinate and y coordinate just like the template says, but they have actual values for those. So the (0,0) point will have 0 and 0 for the x and (5,5) point has 5 and 5 and so on. So for one class you can have many, many objects of that class that instantiate that class. They have actual data in them that fill in the data fields. So, just want to make clear the difference between a class and an object. Encapsulation is another concept that's usually associated with object oriented programming. Actually, you know what, I would say it's associated with the use of abstraction in general, but right now, we're talking about it in the context of object oriented programming. And the idea behind encapsulation is that you might want to hide data from the programmer, okay? So when I say the programmer, I mean the programmer who is using your class. So, the person who's defining the class, you can't hide anything from that person. But if there's a programmer who's using your class, you might want to hide some data, conceal something. So you might want to make the data, allow the data only to be accessed using the methods that are part of the class. So rather than allowing the programmer to just go straight in and modify, say it's a point, just go straight in and modify the x and the y values as a point, we might instead say, look, if you want to modify it, you have to use this method to modify it, the method that's provided in the class. And why would you do this? Maybe we don't trust the programmer to keep the data consistent, that's the main thing. Not that we don't trust the programmer, but the programmer has a lot of things on his or mind, might make a mistake, right? So we want to relieve the programmer that burden of dealing with the internal consistency of the data. So we just say look, programmer, if you use these methods to modify the internal data then we, the people who made the class, guarantee that the data will stay consistent, okay? So you, as a programmer, you don't have to think about that, just use our methods. So that's encapsulation. Where you say look, the internal data can't be accessed directly from the outside, or at least part of it can't be accessed directly from the outside. You basically put up a wall, a hard abstraction barrier, which are the methods that you use to access the data. So as an example, let's say I've got a point and a function, and I want to do this point is to double its distance from the origin, right? So I want to double its x and double its y so it's twice as far along the line between the origin and the point, you want to move that point, you want to scale it, to double it, right, double its distance. So you gotta double the x and double the y. So option one is to make a method to encapsulate, right? So you make a method called double distance and it does exactly that function. That's the safe way. Another way is to say look, I don't want to make that method, I'll just let the programmer directly access the x and y, and the programmer can double the x and y when they want to. The problem with that is what if the programmer makes a little mistake, and doubles the X but forgets to double the Y or doubles the X and triples the Y or whatever? Whatever the mistake, if a mistake like that happens then the X and the Y values inside the object are now inconsistent with each other. And so a mistake was allowed to be made, where if you force them to use this Double Dist function that you made and you know you debugged it correctly, then they can't make such a mistake. Thank you.
+## Classes - object-oriented programming paradigm
+- Collection of data fields and functions (methods) that share a well defined responsibility. All related to the same concept
+- Class is a template. Contains data fields, but not the data
+- Example for a geometry program
+    - Data: x and y Coordinates
+    - Function(Methods): DistToOrigin(), Quadrant(), AddXOffset(), AddYOffset(), SetX(), SetY()
+
+## Object
+- an instance of the class
+- contains data
+- Example for a geometry program
+    - Point class with points (0,0) (5,5) (6,0)
+
+
+## Encapsulation
+- concept associated with OOP
+- associated with the use of abstraction
+- Data can be protected from the programmer (not creator)
+- Data can be accessed only using methods
+- Why: Maybe don't trust the programmer to keep data consistent
+- Helps debugg and avoid mistakes from user error
+- Benefit for internal consistency of data
+- Data can't be accessed directly from the outside
+- Hard abstraction barrier: Methods to access the data
+- Example for a geometry program
+    - Option 1: Make method DoubleDist()
 
 # M3.1.2 - Support for Classes (1)
-Module 3: Object-Orientation in Go. Topic 1.2: Support for Classes.
-Play video starting at ::6 and follow transcript0:06
-So there's no Class keyword in Go. So Go doesn't officially have anything called classes, although it has something that's just like them but it doesn't have a class. So other object throwing to language or object to language this have this class keyword. And then the data field and the methods that are associated with the class, they are defined inside that the blocks defined by the class, okay? So the code that I'm showing here is not Go. The code is Python, yeah, the Python that I wrote and this is to make a point class in python this is just an example. So in this case, you can say class point and then everything in that block is associated with the Point class. Now, I'm defining a function called init which is its constructor. And you'll notice inside there, it defines self.x=, self.y=. So self.x, self.y, those are the data that are associated with the point, and we're assigning them a initialization function. So it's assigning to values x and y values. But this is normally how it's done in other object oriented languages. Go does not do it in the same way, it doesn't have a class keyword like this, but you can get a similar effect. Okay, so in Go, they have a different way of associating methods with data. So remember, that's what a class really is, a class is a bunch of data associated with a bunch of methods that operate on the data. And together, the methods and data make what you would consider to be a class. So you need to have a way to associate a method [COUGH] with some data. And the way that's done inside Go is using a receiver type, so when you define the function you give it what’s called a receiver type which is the type that method is associated with. So the data is going to be some type. And the method, the way you associate the method with that data is when you define that function you give it a receiver type. And that receiver type is the type that that method is associated with. And then when you want to call a method you use standard dot notation to call it. So let's show an example. So let's say I make up a new type called MyInt, and it's just an int. Okay, so type MyInt int. But it's MyInt, so I can make up methods for this type. By the way, I can't add associated methods with existing types. As a rule, whenever you associate a method with a type like this, using a receiver ,type associated with a receiver type. You gotta make sure that the type is defined in the same package as the method that you're associating with it, they have to be in the same package. And so you can't do that with a built in type like int or string o something like that, you can't just add methods onto that because they're not, they're built in they're not defined in the same package as your code. So I make my int, now, I make a function, this function, double. And I want to associate double with the MyInt type. So Double is going to be something that's going to double an integer and only works on MyInt. So when I define the function, notice it's slightly different than a normal function definition. Before the name of the function Double, to the left of that, highlighted in red, I have the receiver type defined. So MyInt is the receiver type and mi is the variable that refers to the particular receiver object that this Double is going to be called on, okay? Because remember when I call Double, when I invoke double, I'm going to have to say, say I have, actually let's look at the invocation down here. Actually, if you look at the bottom, func main, I declare a MyInt v, v := MyInt(3). So I make it, and that's what v is. Then when I call, you see highlighted in red, when I called double, I say v.Double. And so what happens is, when it's trying to figure out this double, it looks back at the things to the left of the dot. The object to the left of the dot looks at what type it is and it knows, that's the Double that I want, the Double that's associated with that type. So that's what the dot notation is for, basically the object to the left of the dot tells you what type you're looking for, because double could be defined in lots of different types. But I'm specifically looking for Double for v's type which is a MyInt. So anyway, back to the definition of the Double function from MyInt, the double method. I have to associate it with the MyInt type by putting the (mi MyInt) in parenthesis, the highlighted red part, before the name of the function, when I defined the function, when I declared the function. So and then what happens is inside the definition, so if we look inside double it just returns int (mi*2). Now, notice that it takes mi, now it refers to mi, because basically what's happening is that mi that object to the left of the dot when you make the call. That object ends up being an argument and implicit argument to double. We'll talk about that in a second. So this function just takes mi whatever integer it is and multiplies it times 2 turns it into an integer and returns it as an integer. All right, so then in the main I can just call v.Double and it call the Double that is associated with the type of v which is MyInt. So, what I'm showing here is just that this type MyInt is the receiver type for this function Double, that I have defined. So whenever I call Double, I have to prefix it using this dot notation, I prefix it with an object of that type, of the MyInt type, so v.Double(). So that the machine knows, okay, this is the Double that I want, the one that's associated where this MyInt is the receiver type. Implicit Method Argument. So what I'm saying here, is that even though it looks like Double takes no arguments, right? If I look at the definition of Double, there's no arguments there. But there is an implicit argument. Whenever you have a receiver type, whenever there's a method, it has a receiver type. The object of that receiver type, that it is to the left of the dot. That is an implicit argument to the function, to the method rather. So even though double looks like it has no argument, it really has one argument. Okay, a hidden argument. You do not pass it explicitly. So when I call Double I say (v.Double()) in parentheses I have nothing, right? But that v is going to be passed to the Double function when you actually make the call. So that's passed automatically invisibly, the programmer doesn't have to see it. But it's important that you as a programmer are aware that it is actually being passed. Reason why is because it's passed call by value. So this is how passing, argument passing is done and go is call by value. So what happens is when that v, that object to the left of that dot gets passed to Double implicitly, it is passed by value, a copy of v is made and passed to Double. So this impacts what Double can do. So it's important to realize, if v is actually being passed, the object to the left of the dot is being passed as an argument even if though it doesn't look like it in an obvious way. Thank you.
+- Go doesn't have a class keyword
+- Most OOP languages have a class keyword
+    - Data fiels and methods are defined inside a class block
+
+## Associating methods with data in Go
+# Receiver type
+- Type that the method is associated with
+- To associate the data with the method the function is given the reciever
+- When you call the method, you used standard dot notation
+
+- When associating a method with a receiver the type needs to be defined in the same package as the associated method
+- Function definition is different than normal function definitions, to define the receiver
+
+Example
+```
+// created type
+
+type MyInt int
+
+// before the name of the function is the receiver type (mi MyInt)
+
+func (mi MyInt) Double () int {
+    return int(mi*2)
+}
+func main() {
+    v := MyInt (3)
+    fmt.Println(v.Double())
+    // left of dot, v is the object, the data
+    // right of dot, function/method
+}
+```
+
+- Type MyInt, is a type like string or int but the programmer creates it
+- The Method Double() is defined and will only work with a MyInt typed variable
+- All variables defined with a MyInt type of data will be an int, and will work with the Double() Method
+- variable v is set to be a MyInt type, which is an int and that int is 3
+- The Method Double() is called with variable v. Since variable v is MyInt type, it can be used with the method Double()
+- The Method Double will use the value of the MyInt type as an argument defined as mi. v.Double() makes this process happen
+
+## Flow
+- Create a type called MyInt which will be an int
+- Create a method that only works with MyInt types
+- Method will take one argument of a MyInt type and use it as the data for mi
+- Method will return a value as an int
+
+- MyInt is the receiver type for method Double
+- To call Double, it needs to be prefixed with dot notation
+- The prefix needs to be a MyInt type
+
+## Implicit Method Argument
+- Double does not take an argument in the definition
+- There is an implicit argumet for Double
+- For a Method, there is a receiver type
+- A receiver type will have an object assigned, the thing to the left of the dot notation. That is where the data is coming from. Passed implicitly
+- The receiver type is an implicit argment to the method
+- Double looks like it doesn't have an argument. But it has one implicit argument
+- When the Double method is called the object used in the call will be passed to the Double method
+- It is passed with call by value
+- a copy of v will be made and passed to Double
 
 # M3.1.3 - Support for Classes (2)
 Module 3: Object-Orientation in Go, Topic 1.3: Support for Classes.
