@@ -14,6 +14,18 @@ type Animal struct {
 	noise      string
 }
 
+func (a *Animal) Eat() {
+	fmt.Println("\n Response:", a.food, "\n")
+}
+
+func (a *Animal) Move() {
+	fmt.Println("\n Response:", a.locomotion, "\n")
+}
+
+func (a *Animal) Speak() {
+	fmt.Println("\n Response:", a.noise, "\n")
+}
+
 func main() {
 	//Cow struct
 	cow := Animal{
@@ -53,46 +65,40 @@ func main() {
 		switch animal {
 		case "cow":
 			if action == "food" {
-				fmt.Println("\n Response:", cow.food, "\n")
+				cow.Eat()
 			}
 
 			if action == "locomotion" {
-				fmt.Println("\n Response:", cow.locomotion, "\n")
+				cow.Move()
 			}
 
 			if action == "noise" {
-				fmt.Println("\n Response:", cow.noise, "\n")
-			} else {
-				fmt.Println("\n Something went wrong. Please try again. \n")
+				cow.Speak()
 			}
 
 		case "bird":
 			if action == "food" {
-				fmt.Println("\n Response:", bird.food, "\n")
+				bird.Eat()
 			}
 
 			if action == "locomotion" {
-				fmt.Println("\n Response:", bird.locomotion, "\n")
+				bird.Move()
 			}
 
 			if action == "noise" {
-				fmt.Println("\n Response:", bird.noise, "\n")
-			} else {
-				fmt.Println("\n Something went wrong. Please try again. \n")
+				bird.Speak()
 			}
 		case "snake":
 			if action == "food" {
-				fmt.Println("\n Response:", snake.food, "\n")
+				snake.Eat()
 			}
 
 			if action == "locomotion" {
-				fmt.Println("\n Response:", snake.locomotion, "\n")
+				snake.Move()
 			}
 
 			if action == "noise" {
-				fmt.Println("\n Response:", snake.noise, "\n")
-			} else {
-				fmt.Println("\n Something went wrong. Please try again. \n")
+				snake.Speak()
 			}
 		default:
 			fmt.Println("\n Something went wrong. Please try again. \n")
