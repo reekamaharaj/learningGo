@@ -59,11 +59,128 @@ func (t Triangle) Perimeter() float64{...}
 - In Go you do not need to explicitly say that Triangle satisfied the Shape2D interface
 
 # M4.1.3 - Interface vs. Concrete Types
-Module 4: Interfaces for Abstraction, Topic 1.3: Interface versus Concrete Types. So concrete types and interface types are fundamentally different. A concrete type is a regular type, it specifies the exact representation of the data and the methods, data specifically, but also methods that are used in the type of the receiver type. So, they're fully specified, and it has complete implementations of the method, of all the methods. So any methods that use this type as a receiver type, they're completely specified. But the first thing is sort of a big difference between interface types and concrete types is that the exact representation of the data is in there. So if you have a concrete type, it's going to have a bunch of data, one or more pieces of data that are associated with the type. And interface type just specifies some method signatures. So no data is specified, just the methods. And even the methods, the implementations are abstracted. You don't have implementations, you just have the signatures of the methods. So that's the difference between the two. But remember that when you give an interface, interface eventually gets mapped to a concrete type, we'll see that in a second. So an interface value, when you create an interface you declare an interface type, you make a value of that type. You can treat it like other values, ints, floats and all this, you can make a variable of that type. So I can make a variable of the type of a particular interface, like my shape 2D, I can make a variable of that type. Now an interface value, the value of an interface like that has two components. First, there's dynamic type, second there's dynamic value. So dynamic type, is a concrete type that is assigned to. So the dynamic value though is actually the value of that dynamic type. So the dynamic type is just the type which it's associated to. So to be more specific, let's say we're talking about shape 2D, that's my interface, right. This interface, there are several concrete types which satisfy my interface, like rectangle, that satisfies my interface, triangle satisfies my interface. Now when I make my interface variable and I give it a value, that value has gotta be mapped to a concrete type. Maybe it's mapped to a rectangle, or a triangle, or something like that. And that rectangle, triangle, whatever it is, it's going to have a value. So the rectangle might have some points in it, and the triangle might have some points in it. So there's a dynamic type which is the type of the concrete type that the interface value is assigned to. And the dynamic value is the value of that dynamic type. So an interface value is actually a pair, the dynamic type together with the dynamic value. This probably will become more clear within the next lesson given a bit of an example. So defining an interface type, so we got this type speaker interface speaker interface. And all we define in there is the speak method. Which takes the arguments and returns no values, so very simple interface. So that's our interface type at the top. Now then I also defined my dog type, okay. And it's a type called dog, its structure, and it's got just a string in there, okay. The name of the dog let's say, name, it's called name. So it just got, that's my whole dog type. And what I'm going to do is I'm going to make this dog type, make it satisfy my speaker interface. So I declare a function called Speak, it's receiver type is Dog. And it just prints the name of the dog, d.name, so that's what the dog speaks. So now, Dog is a type that satisfies the Speaker interface. In my main the first thing I do is I declare a speaker. So an s1, s1 is a variable and is going to actually have a speaker value. So it's a speaker type, it's going to be a speaker value, right. So s1 is an interface value. Next I declare a dog, [LAUGH] a d1, it's going to be my dog type. It's going to have a name equal to Brian. Now then I can say s1 equals d1. Now, that is legal because the dog type satisfies the s1 interface. So S1 can be a dog because it satisfies the interface, so I can say s1 is equal to d1. So now s1, s1 is a speaker type, its concrete type that is assigned to is d1. That is the concrete object that it's assigned to, which is the concrete type is going to be the dynamic type is going to be the dog type. And the value is going to be the dog value, which he's name is Brian. And then I can say s1.speak, and it'll call the speak of the dog, which we'll just print out Brian. So the Dynamic type in this case of s1 is Dog, is a Dog type. And the Dynamic value is d1 which contains that name Brian, okay. So this s1 which is a speaker object, it is, sorry, it's a speaker object which is an interface, it is a pair. The Dynamic type Dog, that's the type, and Dynamic value, Dynamic value, which is d1 in this case. Which has this Dog name, name Brian, that's all it has in it.
-Play video starting at :5:18 and follow transcript5:18
-Okay, so an interface, just to repeat, has dynamic type and dynamic value. Now interface can have a Nil Dynamic Value, meaning no dynamic value. It can have a type, a dynamic type but not a dynamic value. So let me give you an example of that. [COUGH] We got a variable, s1 is the speaker, okay. Then I have my dog d1 and I make it point to a dog, *Dog, then I say s1=d1. Now when I do that, I'm assigning s1 to d1, but d1, it's not a concrete object it's type is Dog, or *Dog, it's pointing to a Dog. But it doesn't have any data in it, okay. So remember Dog has this data, this name, which is a string. But d1 is a pointer to a Dog, so it's not an actual Dog, it doesn't have the data in it. Okay, so d1 has no concrete value at this point. But it have a type, okay, it's associated with a dog, it's appointed to a dog. So what that means is when I do that assignment s1 equals d1. S1 has a dynamic type, dog, or dog pointer, but has no dynamic value because d1 doesn't have a dynamic value yet, right. because d1 is a pointer to a dog, it doesn't actually have dog information in it, namely the name, okay. So this is a situation where you got an interface that has a nil dynamic value. Nil means nothing, it's sort of the empty end goal. So it has a nil dynamic value but it has a dynamic type.
-Play video starting at :6:50 and follow transcript6:50
-And this is legal, to have a dynamic type but no dynamic value is legal. So when you have that situation, when you have an interface like that, with a dynamic type but no dynamic value, you can still call the methods of s1. So in this case, s1, its method is speak, right. That's the method that's defined in the interface. And Dog, or at least it's specified in the interface. And then Dog defines that method, right. So when I say Dog defines that method, there's a method Dog who's receiver type is Dog, method speak who's receiver type is Dog. And that method is fully specified. Now this s1, it has a dynamic type. The fact that it has a dynamic type means that the compiler knows that when you call Speak, call that speak method on s1. It could look at the type and say, the type is dog, the dynamic type is dog. So I know that the method implementation that I want is dog method implementation. So it can call that function, that method speak even without having a dynamic value, all it needs to know is the dynamic type. The dynamic type is enough information to go find which implementation Speak you want to use. Now, it would be wise inside the speak function to check, to see if the variable has a dynamic value or not. But the point though, is that you can make the call even without a dynamic value, all you need is a dynamic type. So we take a look over here, we got this function Dog, Speak rather, and its receiver is Dog. And notice inside the function it says if d == nil then it prints ("<noise>") some generic thing, else it prints (d.name), it prints the dog's name. Now what that does is it checks saying d == nil</noise> It checks look, does this have a dynamic value or not? If it doesn't have a dynamic value and d equals nil then it just does what it says there. Prints noise because it doesn't have a dynamic value yet, prints something generic. L, so if it does have a value then it knows it can actually access dname, d.name, and so it prints out the name. And then the rest of the code maybe that would appear inside a main or something like that, which I'm not drawing here. But so I declare this speaker as one, I declare the Dog pointer d1. I set s1 to d1 so now s1 has a dynamic type but no dynamic value. And then I can call s1.speak and it works, right. A class one does speak even without the dynamic value because it can figure out, the compiler can figure out, I see s1 is mapped to d1 which is a dog. So I can find the dog, the method is bigger that is associated with dog that I had to find up above, so this is actually legal. So the point of all this is it legal to have a speaker, sorry an interface, with a dynamic type but not a dynamic value. And in that situation, you can still call the method of that interface, so it is legal to do that. Now we'll be wise like we do here to check inside the method if the dynamic value is nil or not, right. Because you might want to do something, for instance if we didn't do this check, this is where we say if d equals nil. If we didn't do that check, we might try to print D.name, even though D was nil, and that would throw an error at run time. So we don't want to, it's probably wise to check it but it's allowed. This is a legal state, to have a dynamic type but no dynamic value. Now on the other hand, people use a term nil interface value, this describes an interface with a nil dynamic type. So not only does it not have a dynamic value, it doesn't have a dynamic type, and that's a different situation. [COUGH] In that situation, when you don't even have the dynamic type, then you cannot call the methods on that interface. Because without the dynamic type, you can't know which method you are referring to. So for instance, here If at the top example I got the speaker s1 dog d1 and I say s1 equals d1. So it has a dynamic type but no dynamic value. So the compiler configure out if I go to call speak It would be able to figure out, I see, it's the dog's speak., the one whose receiver type is dog. But if I have a nil dynamic type, so if I just say VAR S1 speaker and leave it at that. Then I don't have a dynamic type yet because I haven't assigned s1 to anything, right. So s1 is just sitting there with no dynamic type, no dynamic value. And in that state there's no actual method to call. He tried to call a speak on that, it would throw an error because there's no method implementation. Remember to interface doesn't specify the method, it doesn't give the implementation of the method. It specifies just the name and the arguments and the return value, but it doesn't actually define the method. So if you just say var s1 Speaker, there's no method that it is associated with. There's no speak method associated with s1, so this would throw an error. So the point here is summarized that if you have no dynamic type and no dynamic value on interface, then you can't call the methods of the interface, thank you.
+
+## Concrete Types
+    - Specifies the exact representation of the data and methods
+    - Complete method implementation is included
+    - Also specifies the type of receiver type
+    - Concrete type will have data that is associated with the type
+
+## Interface Types
+    - Specifies some method signatures
+    - Implementations are abstracted
+    - No data is specified, only methods
+    - Interface will eventually be mapped to a concrete type
+
+## Interface Value
+    - When creating an interface you declare an interface type and make a value for that type
+    - That interface type value can be treated like any other value (float, ints...)
+        - Assigned to variables
+        - Passed, returned
+
+    - Interface value has two components
+        - Dynamic Type
+            - a concrete type that is assigned
+            - Type that it is assigned to
+        - Dynamic Value
+            - The value of the dynamic type
+### Example Shape2D Interface
+    - Concrete types that satisfy interface
+        - Rectangle
+        - Triangle
+        - Circle
+    - Make an interface variable
+        - give it a value, the value has to be mapped to a concrete type
+        - Dynamic Type: The type of concrete type that the interface value is assigned to. Ex. Rectangle, Triangle, Circle
+        - Dynamic Value: The value of the Dynamic Type
+
+Interface value is a pair of dynamic type and dynamic value
+
+## Defining an Interface Type
+
+```
+//Define Speaker interface
+type Speaker interface {Speak()}
+
+//Create dog type
+type Dog struct {name string}
+
+//Make dog type satisfy the Speaker interface by creating a function and having the receiver type be dog
+func (d Dog) Speak() {
+
+    fmt.Println(d.name)
+}
+func main() {
+    //Declare Speaker
+    //s1 is a variable and is the speaker interface value
+    var s1 Speaker
+
+    //Declare Dog
+    //d1 is a dog type
+    var d1 Dog("Brian")
+
+    //speaker interface value can equal dog type because dog type satisfies the speaker interface
+    s1=d1
+    s1.Speak()
+
+    //d1 is the concrete type assigned to speaker
+}
+```
+- s1 Speaker type
+- s1 is assigned to concrete type d1
+- concrete type is the dynamic type, dog type
+- dynamic value is the dog type value, the name
+
+### Interface with Nil Dynamic value
+    - An interface can have a dynamic type but not dynamic value
+```
+var s1 Speaker
+//d1 is not a concrete object, it points to a dog
+var d1 *Dog
+
+//s1 does not have a value, but will be dog type and have a pointer to Dog
+s1=d1
+```
+s1 doesnt have data. s1 has a dynamic type, of dog or a pointer to a dog. but no dynamic value
+- interface here has a nil dynamic value
+- Nil: nothing, empty end goal
+- Can still call methods of s1
+- Compiler knows that when Speak is called
+
+```
+func (d *Dog) Speak(){
+    if d == nil {
+        fmt.Println("<noise>")
+    } else {
+        fmt.Println(d.name)
+    }
+}
+var s1 Speaker
+var d1 *Dog
+s1 = d1
+s1.Speak()
+```
+
+    - if d == nil then it prints ("<noise>") some generic thing
+    - else it prints (d.name), it prints the dog's name
+
+### Nil Interface Value
+- Interface with nil dynamic type
+- No dynamic type, cannot call the methods on that interface
+
+Nil dynamic value and valid dynamic type
+```
+var s1 Speaker
+var d1 *Dog
+s1 = d1
+```
+- Can call a method since type is known
+
+Nil Dynamic Type
+```
+var s1 Speaker
+```
+Cannot call a method, runtime error
 
 # M4.2.1 - Using Interfaces
 Thank you. Thank you. So interfaces, we've talked about them. And one thing we want to talk about now is a little bit of how to use them. So what are they used for, language-wise? And in language, why would you need an interface? And I already said, interfaces, they express some sort of a conceptual similarity between different types. So the idea is that if two types satisfy an interface, then they must be similar in some way that is important to the application. So one common, sort of, practical thing that you would use an interface for, is when you need a function, you want to write a function which takes multiple types as a parameter. So specifically, normally, a function, it takes, say, it takes an integer as its arguments, right? It can only take an integer. But what if you want to take an integer or a float? Something like this, maybe a integer, a float or a string, right? You want it to take multiple types. In different types, it'll do different things, but you want it to be able to take different types. You can use an interface for that. So giving an example, say I've got a function, foo ( ), and it's gotta take a parameter. And this parameter, it could be either type X or type Y. And I'm talking very generically now. I'll give you a concrete example in the next slide, but so I got this foo. It's going to take a parameter which is type X or type Y. I want it to take either type. So the way I can do that is I can define an interface called Z.
