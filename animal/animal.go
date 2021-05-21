@@ -8,22 +8,23 @@ import (
 )
 
 type Animal struct {
-	name       string
-	food       string
-	locomotion string
-	noise      string
+	name, food, locomotion, noise string
+}
+
+func (a *Animal) Name() {
+	fmt.Println("\n Response:", a.name)
 }
 
 func (a *Animal) Eat() {
-	fmt.Println("\n Response:", a.food, "\n")
+	fmt.Println("\n Response:", a.food)
 }
 
 func (a *Animal) Move() {
-	fmt.Println("\n Response:", a.locomotion, "\n")
+	fmt.Println("\n Response:", a.locomotion)
 }
 
 func (a *Animal) Speak() {
-	fmt.Println("\n Response:", a.noise, "\n")
+	fmt.Println("\n Response:", a.noise)
 }
 
 func main() {
