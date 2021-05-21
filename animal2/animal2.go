@@ -1,17 +1,144 @@
-// Write a program which allows the user to create a set of animals and to get information about those animals. Each animal has a name and can be either a cow, bird, or snake. With each command, the user can either create a new animal of one of the three types, or the user can request information about an animal that he/she has already created. Each animal has a unique name, defined by the user. Note that the user can define animals of a chosen type, but the types of animals are restricted to either cow, bird, or snake. The following table contains the three types of animals and their associated data.
+package main
 
-// Animal	Food eaten	Locomtion method	Spoken sound
-// cow	grass	walk	moo
-// bird	worms	fly	peep
-// snake	mice	slither	hsss
-// Your program should present the user with a prompt, “>”, to indicate that the user can type a request. Your program should accept one command at a time from the user, print out a response, and print out a new prompt on a new line. Your program should continue in this loop forever. Every command from the user must be either a “newanimal” command or a “query” command.
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
-// Each “newanimal” command must be a single line containing three strings. The first string is “newanimal”. The second string is an arbitrary string which will be the name of the new animal. The third string is the type of the new animal, either “cow”, “bird”, or “snake”.  Your program should process each newanimal command by creating the new animal and printing “Created it!” on the screen.
+type Animal interface {
+	Eat()
+	Move()
+	Speak()
+	Name() string
+}
 
-// Each “query” command must be a single line containing 3 strings. The first string is “query”. The second string is the name of the animal. The third string is the name of the information requested about the animal, either “eat”, “move”, or “speak”. Your program should process each query command by printing out the requested data.
+type Cow struct {
+	name string
+}
 
-// Define an interface type called Animal which describes the methods of an animal. Specifically, the Animal interface should contain the methods Eat(), Move(), and Speak(), which take no arguments and return no values. The Eat() method should print the animal’s food, the Move() method should print the animal’s locomotion, and the Speak() method should print the animal’s spoken sound. Define three types Cow, Bird, and Snake. For each of these three types, define methods Eat(), Move(), and Speak() so that the types Cow, Bird, and Snake all satisfy the Animal interface. When the user creates an animal, create an object of the appropriate type. Your program should call the appropriate method when the user issues a query command
+func (c Cow) Eat() {
+	fmt.Println("\n Response: Grass \n")
+}
 
-// Test the program by running it and issuing three newanimal commands followed by three query commands. Each new animal should involve a different animal type (cow, bird, snake), each with a different name. Each query should involve a different animal and a different property of the animal (eat, move, speak). Give 2 points for each query for which the program provides the correct response.
+func (c Cow) Move() {
+	fmt.Println("\n Response: Walk \n")
+}
 
-// Examine the code. If the code contains an interface type called Animal, which is a struct containing three fields, all of which are strings, then give another 2 points. If the program contains three types – Cow, Bird, and Snake – which all satisfy the Animal interface, give another 2 points.
+func (c Cow) Speak() {
+	fmt.Println("\n Response: Moo \n")
+}
+
+type Bird struct {
+	name string
+}
+
+func (b Bird) Eat() {
+	fmt.Println("\n Response: Worms \n")
+}
+
+func (b Bird) Move() {
+	fmt.Println("\n Response: Fly \n")
+}
+
+func (b Bird) Speak() {
+	fmt.Println("\n Response: Hiss \n")
+}
+
+type Snake struct {
+	name string
+}
+
+func (s Snake) Eat() {
+	fmt.Println("\n Response: Mice \n")
+}
+
+func (s Snake) Move() {
+	fmt.Println("\n Response: Slither \n")
+}
+
+func (s Snake) Speak() {
+	fmt.Println("\n Response: Peep \n")
+}
+
+func main() {
+	for {
+		fmt.Println("Choose an animal: Cow, Bird, or Snake.")
+		fmt.Println("Choose a topic: Food, Locomotion, or Noise.")
+		fmt.Println("Enter both. For a response about the animal.\n Example if you entered: Dog Noise \n You would get a response with 'Bark'.")
+
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		userInput := scanner.Text()
+		lowerString := strings.ToLower(userInput)
+		s := strings.Split(lowerString, " ")
+		animal, action := s[0], s[1]
+
+		switch animal {
+		case "cow":
+			if action == "food" {
+				cow.Eat()
+			}
+
+			if action == "locomotion" {
+				cow.Move()
+			}
+
+			if action == "noise" {
+				cow.Speak()
+			}
+
+		case "bird":
+			if action == "food" {
+				bird.Eat()
+			}
+
+			if action == "locomotion" {
+				bird.Move()
+			}
+
+			if action == "noise" {
+				bird.Speak()
+			}
+		case "snake":
+			if action == "food" {
+				snake.Eat()
+			}
+
+			if action == "locomotion" {
+				snake.Move()
+			}
+
+			if action == "noise" {
+				snake.Speak()
+			}
+		default:
+			fmt.Println("\n Something went wrong. Please try again. \n")
+		}
+	}
+}
+
+// Animal interface, struct with three string fields, three types cow, snake, bird
+// User can create animals of one of the three types
+// User can get information about an animal they created
+// Animal has a name and a type
+// Animal interface has three methods, methods take no arguments and return no values
+
+// Accept one response at a time
+// Print out a response
+// New prompt with a new line
+// Program loops forever
+
+// User commands "new animal" or "query"
+
+// "new animal" command, single line with three strings
+// "new animal", name of the new animal, type of new animal
+// “Created it!” on the screen after created
+
+// Each “query” command, single line with 3 strings
+// “query”, name of the animal, name of the information requested about
+// Process query command by printing out the requested data
+
+// Test with three New animal commands
+// Test with three query commands

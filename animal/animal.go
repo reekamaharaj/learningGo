@@ -129,10 +129,5 @@ func main() {
 
 // You will need a data structure to hold the information about each animal. Make a type called Animal which is a struct containing three fields:food, locomotion, and noise, all of which are strings. Make three methods called Eat(), Move(), and Speak(). The receiver type of all of your methods should be your Animal type. The Eat() method should print the animal’s food, the Move() method should print the animal’s locomotion, and the Speak() method should print the animal’s spoken sound. Your program should call the appropriate method when the user makes a request.
 
-// Submit your Go program source code.
-
-// This assignment is worth a total of 10 points.
-
-// Test the program by running it and testing it by issuing three requests. Each request should involve a different animal (cow, bird, snake) and a different property of the animal (eat, move, speak). Give 2 points for each request for which the program provides the correct response.
-
-// Examine the code. If the code contains a type called Animal, which is a struct containing three fields, all of which are strings, then give another 2 points. If the program contains three methods called Eat(), Move(), and Speak(), and all of their receiver types are Animal, give another 2 points.
+// Test the program by running it and testing it by issuing three requests. Each request should involve a different animal (cow, bird, snake) and a different property of the animal (eat, move, speak).
+// Examine the code. If the code contains a type called Animal, which is a struct containing three fields, all of which are strings, then give another 2 points. If the program contains three methods called Eat(), Move(), and Speak(), and all of their receiver types are Animal.
