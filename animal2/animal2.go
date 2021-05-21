@@ -7,6 +7,15 @@ import (
 	"strings"
 )
 
+type UserAnimal struct {
+	name       string
+	animalType string
+}
+
+func (u UserAnimal) NewAnimal() {
+	fmt.Println("\n Response:", u.name, "\n")
+}
+
 type Animal interface {
 	Eat()
 	Move()
@@ -14,6 +23,7 @@ type Animal interface {
 	Name() string
 }
 
+// Cow struct and methods
 type Cow struct {
 	name string
 }
@@ -30,6 +40,7 @@ func (c Cow) Speak() {
 	fmt.Println("\n Response: Moo \n")
 }
 
+// Bird struct and methods
 type Bird struct {
 	name string
 }
@@ -46,6 +57,7 @@ func (b Bird) Speak() {
 	fmt.Println("\n Response: Hiss \n")
 }
 
+// Snake struct and methods
 type Snake struct {
 	name string
 }
@@ -63,59 +75,30 @@ func (s Snake) Speak() {
 }
 
 func main() {
-	for {
+	fmt.Println("Would you like to make a query about an animal or add a new animal? Enter 'query' or 'new' to get started.")
+
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	userInput := scanner.Text()
+	command := strings.ToLower(userInput)
+
+	switch command {
+	case "query":
+		fmt.Println("What would you like to know?")
 		fmt.Println("Choose an animal: Cow, Bird, or Snake.")
 		fmt.Println("Choose a topic: Food, Locomotion, or Noise.")
 		fmt.Println("Enter both. For a response about the animal.\n Example if you entered: Dog Noise \n You would get a response with 'Bark'.")
-
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		userInput := scanner.Text()
 		lowerString := strings.ToLower(userInput)
 		s := strings.Split(lowerString, " ")
 		animal, action := s[0], s[1]
+	case "new":
+		fmt.Println("Enter a name and an animal type (cow, bird or snake)")
 
-		switch animal {
-		case "cow":
-			if action == "food" {
-				cow.Eat()
-			}
-
-			if action == "locomotion" {
-				cow.Move()
-			}
-
-			if action == "noise" {
-				cow.Speak()
-			}
-
-		case "bird":
-			if action == "food" {
-				bird.Eat()
-			}
-
-			if action == "locomotion" {
-				bird.Move()
-			}
-
-			if action == "noise" {
-				bird.Speak()
-			}
-		case "snake":
-			if action == "food" {
-				snake.Eat()
-			}
-
-			if action == "locomotion" {
-				snake.Move()
-			}
-
-			if action == "noise" {
-				snake.Speak()
-			}
-		default:
-			fmt.Println("\n Something went wrong. Please try again. \n")
-		}
+	default:
+		fmt.Println("\n Something went wrong. Please try again.")
 	}
 }
 

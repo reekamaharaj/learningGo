@@ -101,7 +101,7 @@ func main() {
 				snake.Speak()
 			}
 		default:
-			fmt.Println("\n Something went wrong. Please try again. \n")
+			fmt.Println("\n Something went wrong. Please try again.")
 		}
 	}
 
