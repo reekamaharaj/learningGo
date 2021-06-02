@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 )
 
 type AnimalMethods interface {
@@ -16,6 +19,12 @@ type Animal struct {
 	food       string
 	locomotion string
 	noise      string
+}
+
+type AnimalType struct {
+	cow   string
+	snake string
+	bird  string
 }
 
 func (a *Animal) Name() {
@@ -35,7 +44,23 @@ func (a *Animal) Speak() {
 }
 
 func main() {
+	for {
+		fmt.Println("Type:'new animal' if you would like to add and animal or 'query' if you would like to query an animal")
 
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		userInput := scanner.Text()
+		lowerString := strings.ToLower(userInput)
+
+		switch lowerString {
+		case "new animal":
+			fmt.Println("Create new animal")
+		case "query":
+			fmt.Println("query animal")
+		default:
+			fmt.Println("\n Something went wrong. Please try again.")
+		}
+	}
 }
 
 // Animal interface, struct with three string fields, three types cow, snake, bird
