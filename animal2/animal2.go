@@ -7,82 +7,101 @@ import (
 	"strings"
 )
 
-type AnimalMethods interface {
+type Animal interface {
 	Eat()
 	Move()
 	Speak()
-	Name() string
 }
 
-type Animal struct {
-	name       string
-	food       string
-	locomotion string
-	noise      string
+type Cow struct{}
+type Bird struct{}
+type Snake struct{}
+
+func (c Cow) Eat() {
+	fmt.Println("\nGrass\n")
 }
 
-type AnimalType struct {
-	cow   string
-	snake string
-	bird  string
+func (c Cow) Move() {
+	fmt.Println("\nWalk\n")
 }
 
-func (a *Animal) Name() {
-	fmt.Println("\n Response:", a.name, "\n")
+func (c Cow) Speak() {
+	fmt.Println("\nMoo\n")
 }
 
-func (a *Animal) Eat() {
-	fmt.Println("\n Response:", a.food, "\n")
+func (b Bird) Eat() {
+	fmt.Println("\nWorms\n")
 }
 
-func (a *Animal) Move() {
-	fmt.Println("\n Response:", a.locomotion, "\n")
+func (b Bird) Move() {
+	fmt.Println("\nFly\n")
 }
 
-func (a *Animal) Speak() {
-	fmt.Println("\n Response:", a.noise, "\n")
+func (b Bird) Speak() {
+	fmt.Println("\nPeep\n")
+}
+
+func (s Snake) Eat() {
+	fmt.Println("\nMice\n")
+}
+
+func (s Snake) Move() {
+	fmt.Println("\nSlither\n")
+}
+
+func (s Snake) Speak() {
+	fmt.Println("\nHiss\n")
 }
 
 func main() {
-	for {
-		fmt.Println("Type:'new animal' if you would like to add and animal or 'query' if you would like to query an animal")
+	m := make(map[string]Animal)
+	cow := Cow{}
+	bird := Bird{}
+	snake := Snake{}
 
+	for {
+		fmt.Println("To name an animal enter 'newanimal <enter animal's name> <enter type of animal>")
+		fmt.Println("To query an animal enter 'query <enter animal's name> <enter action you want to query>\n")
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		userInput := scanner.Text()
 		lowerString := strings.ToLower(userInput)
+		s := strings.Split(lowerString, " ")
+		command, name, definition := s[0], s[1], s[2]
 
-		switch lowerString {
-		case "new animal":
-			fmt.Println("Create new animal")
+		switch command {
+		case "newanimal":
+			switch definition {
+			case "cow":
+				m[name] = cow
+				fmt.Println("\nCreated!\n")
+			case "bird":
+				m[name] = bird
+				fmt.Println("\nCreated!\n")
+			case "snake":
+				m[name] = snake
+				fmt.Println("\nCreated!\n")
+			default:
+				fmt.Println("\nSomething went wrong. Please try again.\n")
+			}
 		case "query":
-			fmt.Println("query animal")
+			animal, exists := m[name]
+			if !exists {
+				fmt.Println("\nSomething went wrong. Please try again.\n")
+			} else {
+				switch definition {
+				case "eat":
+					animal.Eat()
+				case "move":
+					animal.Move()
+				case "speak":
+					animal.Speak()
+				default:
+					fmt.Println("\nSomething went wrong. Please try again.\n")
+				}
+			}
 		default:
-			fmt.Println("\n Something went wrong. Please try again.")
+			fmt.Println("\nSomething went wrong. Please try again.\n")
 		}
 	}
 }
-
-// Animal interface, struct with three string fields, three types cow, snake, bird
-// User can create animals of one of the three types
-// User can get information about an animal they created
-// Animal has a name and a type
-// Animal interface has three methods, methods take no arguments and return no values
-
-// Accept one response at a time
-// Print out a response
-// New prompt with a new line
-// Program loops forever
-
-// User commands "new animal" or "query"
-
-// "new animal" command, single line with three strings
-// "new animal", name of the new animal, type of new animal
-// “Created it!” on the screen after created
-
-// Each “query” command, single line with 3 strings
-// “query”, name of the animal, name of the information requested about
-// Process query command by printing out the requested data
-
-// Test with three New animal commands
-// Test with three query commands
